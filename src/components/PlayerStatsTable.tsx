@@ -8,7 +8,7 @@ export interface PlayerStatsTableProps {
 
 export function PlayerStatsTable(props: PlayerStatsTableProps): JSXElement {
   const [sortField, setSortField] = createSignal(Object.keys(STATS_MAP)[0]);
-  const [sortDescending, setSortDescending] = createSignal(true);
+  const [sortDescending, setSortDescending] = createSignal(false);
 
   function onHeaderClick(newSortField: string) {
     // If sorting by the same thing, toggle sort order
@@ -26,21 +26,18 @@ export function PlayerStatsTable(props: PlayerStatsTableProps): JSXElement {
     sortField: string,
     sortDescending: boolean
   ): PlayerDetails[] {
-    if (sortDescending) {
-      return props.playerStats.sort((a, b) =>
-        a[sortField as keyof PlayerDetails] <
-        b[sortField as keyof PlayerDetails]
-          ? 1
-          : -1
-      );
-    } else {
-      return props.playerStats.sort((a, b) =>
-        a[sortField as keyof PlayerDetails] >
-        b[sortField as keyof PlayerDetails]
-          ? 1
-          : -1
-      );
-    }
+    return props.playerStats.sort((a, b) => {
+      const valueA = a[sortField as keyof PlayerDetails];
+      const valueB = b[sortField as keyof PlayerDetails];
+
+      if (sortField === "name") {
+        return sortDescending
+        ? valueB.toString().localeCompare(valueA.toString())
+        : valueA.toString().localeCompare(valueB.toString());
+      }
+
+      return sortDescending ? Number(valueB) - Number(valueA) : Number(valueA) - Number(valueB);
+    });
   }
 
   return (
