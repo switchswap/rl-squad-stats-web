@@ -11,6 +11,6 @@ export function playerWinsToTeamWins(iPlayerWins: IPlayerWins): TeamWins {
   return {
     players: [getPlayerFromId(iPlayerWins.id)],
     totalGames: iPlayerWins.totalGames,
-    totalWins: iPlayerWins.totalWins
-  }
+    totalWins: iPlayerWins.totalWins,
+  };
 }

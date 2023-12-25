@@ -27,7 +27,7 @@ export function toPlayerDetails(iPlayerDetails: IPlayerDetails, playerWins: Team
     winPercentage: (playerWins.totalWins / playerWins.totalGames) * 100,
     demosFor: iPlayerDetails.totalDemosFor,
     demosAgainst: iPlayerDetails.totalDemosAgainst,
-  }
+  };
 }
 
 function getGoalPercentage(totalGoals: number, totalShots: number) {
@@ -39,5 +39,5 @@ function getGoalPercentage(totalGoals: number, totalShots: number) {
     return 100;
   }
 
-  return (totalGoals / totalShots) * 100
+  return (totalGoals / totalShots) * 100;
 }

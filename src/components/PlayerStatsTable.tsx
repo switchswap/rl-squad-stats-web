@@ -22,18 +22,15 @@ export function PlayerStatsTable(props: PlayerStatsTableProps): JSXElement {
     setSortField(newSortField);
   }
 
-  function sortPlayerStats(
-    sortField: string,
-    sortDescending: boolean
-  ): PlayerDetails[] {
+  function sortPlayerStats(sortField: string, sortDescending: boolean): PlayerDetails[] {
     return props.playerStats.sort((a, b) => {
       const valueA = a[sortField as keyof PlayerDetails];
       const valueB = b[sortField as keyof PlayerDetails];
 
       if (sortField === "name") {
         return sortDescending
-        ? valueB.toString().localeCompare(valueA.toString())
-        : valueA.toString().localeCompare(valueB.toString());
+          ? valueB.toString().localeCompare(valueA.toString())
+          : valueA.toString().localeCompare(valueB.toString());
       }
 
       return sortDescending ? Number(valueB) - Number(valueA) : Number(valueA) - Number(valueB);
@@ -57,12 +54,7 @@ export function PlayerStatsTable(props: PlayerStatsTableProps): JSXElement {
                         title={STATS_MAP[item].summary}
                         onClick={() => onHeaderClick(item)}
                       >
-                        {STATS_MAP[item].title}{" "}
-                        {sortField() === item
-                          ? sortDescending()
-                            ? "🔽"
-                            : "🔼"
-                          : ""}
+                        {STATS_MAP[item].title} {sortField() === item ? (sortDescending() ? "🔽" : "🔼") : ""}
                       </button>
                     </th>
                   );
@@ -79,9 +71,7 @@ export function PlayerStatsTable(props: PlayerStatsTableProps): JSXElement {
                 </tr>
               }
             >
-              {(item, index) => (
-                <TableRow position={index() + 1} playerStats={item} />
-              )}
+              {(item, index) => <TableRow position={index() + 1} playerStats={item} />}
             </For>
           </tbody>
         </table>

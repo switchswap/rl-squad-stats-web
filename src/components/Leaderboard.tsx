@@ -8,17 +8,14 @@ export interface LeaderBoardProps {
 }
 
 export function LeaderBoard(props: LeaderBoardProps): JSXElement {
-
   function sortRankings(a: TeamWins, b: TeamWins) {
-     if (a.totalWins < b.totalWins) {
+    if (a.totalWins < b.totalWins) {
       return 1;
-     }
-     else if (a.totalWins === b.totalWins) {
-        return a.totalGames > b.totalGames ? 1 : -1;
-     }
-     else {
+    } else if (a.totalWins === b.totalWins) {
+      return a.totalGames > b.totalGames ? 1 : -1;
+    } else {
       return -1;
-     }
+    }
   }
 
   return (
@@ -37,7 +34,7 @@ export function LeaderBoard(props: LeaderBoardProps): JSXElement {
           </thead>
           <tbody>
             <For
-              // Sort the rankings in descending order 
+              // Sort the rankings in descending order
               each={props.rankings.sort(sortRankings)}
               fallback={
                 <tr>
@@ -45,9 +42,7 @@ export function LeaderBoard(props: LeaderBoardProps): JSXElement {
                 </tr>
               }
             >
-              {(item, index) => (
-                <TableRow rank={index() + 1} winDetails={item} />
-              )}
+              {(item, index) => <TableRow rank={index() + 1} winDetails={item} />}
             </For>
           </tbody>
         </table>
@@ -62,13 +57,13 @@ interface TableRowProps {
 }
 function TableRow(props: TableRowProps): JSXElement {
   let teamName = "";
-  props.winDetails.players.sort(
-    (p1, p2) => {
-      return p1.name > p2.name ?  1 : p1. name < p2.name ? -1 : 0;
-    }
-  ).forEach(player => {
-    teamName += player.name + " ";
-  })
+  props.winDetails.players
+    .sort((p1, p2) => {
+      return p1.name > p2.name ? 1 : p1.name < p2.name ? -1 : 0;
+    })
+    .forEach((player) => {
+      teamName += player.name + " ";
+    });
 
   return (
     <tr class="hover">
@@ -76,7 +71,7 @@ function TableRow(props: TableRowProps): JSXElement {
       <td>{teamName}</td>
       <td>{props.winDetails.totalWins}</td>
       <td>{props.winDetails.totalGames}</td>
-      <td>{(props.winDetails.totalWins / props.winDetails.totalGames * 100).toFixed(2)}%</td>
+      <td>{((props.winDetails.totalWins / props.winDetails.totalGames) * 100).toFixed(2)}%</td>
     </tr>
   );
 }

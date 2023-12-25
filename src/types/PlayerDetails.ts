@@ -17,47 +17,47 @@ export interface StatDetails {
 }
 
 export const STATS_MAP: Record<string, StatDetails> = {
-  "name": {
+  name: {
     summary: "Name",
-    title: "Name"
+    title: "Name",
   },
-  "pointsPerGame": {
+  pointsPerGame: {
     title: "PPG",
-    summary: "Points per game"
+    summary: "Points per game",
   },
-  "goalsPerGame": {
+  goalsPerGame: {
     title: "GPG",
-    summary: "Goals per game"
+    summary: "Goals per game",
   },
-  "assistsPerGame": {
+  assistsPerGame: {
     title: "APG",
-    summary: "Assists per game"
+    summary: "Assists per game",
   },
-  "shotsPerGame": {
+  shotsPerGame: {
     title: "SHPG",
-    summary: "Shots per game"
+    summary: "Shots per game",
   },
-  "savesPerGame": {
+  savesPerGame: {
     title: "SVPG",
-    summary: "Saves per game"
+    summary: "Saves per game",
   },
-  "goalPercentage": {
+  goalPercentage: {
     title: "GP",
-    summary: "Goal percentage"
+    summary: "Goal percentage",
   },
-  "winPercentage": {
+  winPercentage: {
     title: "WP",
-    summary: "Win percentage"
+    summary: "Win percentage",
   },
-  "demosFor": {
+  demosFor: {
     title: "DF",
-    summary: "Demos for"
+    summary: "Demos for",
   },
-  "demosAgainst": {
+  demosAgainst: {
     title: "DA",
-    summary: "Demos against"
-  }
-}
+    summary: "Demos against",
+  },
+};
 
 export function getPlayerStatSummary(playerStatField: string): string {
   return STATS_MAP[playerStatField].summary ?? "";

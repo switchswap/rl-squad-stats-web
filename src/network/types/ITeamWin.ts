@@ -11,6 +11,6 @@ export function toTeamWins(iTeamWins: ITeamWins): TeamWins {
   return {
     players: iTeamWins.players.map(getPlayerFromId),
     totalGames: iTeamWins.totalGames,
-    totalWins: iTeamWins.totalWins
-  }
+    totalWins: iTeamWins.totalWins,
+  };
 }

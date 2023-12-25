@@ -2,7 +2,7 @@ import { JSXElement, createResource } from "solid-js";
 import { getTotalGamesPlayed } from "../network/Queries";
 
 export function NavBar(): JSXElement {
-  const [totalGamesPlayed] = createResource<number, boolean>(true, getTotalGamesPlayed)
+  const [totalGamesPlayed] = createResource<number, boolean>(true, getTotalGamesPlayed);
 
   return (
     <div class="navbar bg-primary rounded-xl mb-6">

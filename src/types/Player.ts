@@ -10,6 +10,6 @@ export function getPlayerFromId(id: string): Player {
   return {
     id: id,
     name: PLAYER_MAP[id],
-    platform: undefined
-  }
+    platform: undefined,
+  };
 }
