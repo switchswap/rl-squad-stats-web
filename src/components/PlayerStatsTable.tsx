@@ -1,5 +1,6 @@
 import { For, JSXElement, createSignal } from "solid-js";
 import { PlayerDetails, STATS_MAP } from "../types/PlayerDetails";
+import { FaSolidSort, FaSolidSortDown, FaSolidSortUp } from "solid-icons/fa";
 
 export interface PlayerStatsTableProps {
   title: string;
@@ -48,14 +49,23 @@ export function PlayerStatsTable(props: PlayerStatsTableProps): JSXElement {
               <For each={Object.keys(STATS_MAP)}>
                 {(item) => {
                   return (
-                    <th class="text-center">
-                      <button
-                        class="btn btn-sm bg-secondary"
-                        title={STATS_MAP[item].summary}
-                        onClick={() => onHeaderClick(item)}
-                      >
-                        {STATS_MAP[item].title} {sortField() === item ? (sortDescending() ? "🔽" : "🔼") : ""}
-                      </button>
+                    <th>
+                      <span class="select-none" title={STATS_MAP[item].summary} onClick={() => onHeaderClick(item)}>
+                        <div class="flex items-center align-bottom gap-1">
+                          <p>{STATS_MAP[item].title}</p>
+                          <div>
+                            {sortField() === item ? (
+                              sortDescending() ? (
+                                <FaSolidSortDown />
+                              ) : (
+                                <FaSolidSortUp />
+                              )
+                            ) : (
+                              <FaSolidSort />
+                            )}
+                          </div>
+                        </div>
+                      </span>
                     </th>
                   );
                 }}
@@ -90,15 +100,15 @@ function TableRow(props: TableRowProps): JSXElement {
     <tr class="hover">
       <th>{props.position}</th>
       <td>{props.playerStats.name}</td>
-      <td class="text-center">{props.playerStats.pointsPerGame.toFixed(2)}</td>
-      <td class="text-center">{props.playerStats.goalsPerGame.toFixed(2)}</td>
-      <td class="text-center">{props.playerStats.assistsPerGame.toFixed(2)}</td>
-      <td class="text-center">{props.playerStats.shotsPerGame.toFixed(2)}</td>
-      <td class="text-center">{props.playerStats.savesPerGame.toFixed(2)}</td>
-      <td class="text-center">{props.playerStats.goalPercentage.toFixed(2)}</td>
-      <td class="text-center">{props.playerStats.winPercentage.toFixed(2)}%</td>
-      <td class="text-center">{props.playerStats.demosFor}</td>
-      <td class="text-center">{props.playerStats.demosAgainst}</td>
+      <td>{props.playerStats.pointsPerGame.toFixed(2)}</td>
+      <td>{props.playerStats.goalsPerGame.toFixed(2)}</td>
+      <td>{props.playerStats.assistsPerGame.toFixed(2)}</td>
+      <td>{props.playerStats.shotsPerGame.toFixed(2)}</td>
+      <td>{props.playerStats.savesPerGame.toFixed(2)}</td>
+      <td>{props.playerStats.goalPercentage.toFixed(2)}</td>
+      <td>{props.playerStats.winPercentage.toFixed(2)}%</td>
+      <td>{props.playerStats.demosFor}</td>
+      <td>{props.playerStats.demosAgainst}</td>
     </tr>
   );
 }
