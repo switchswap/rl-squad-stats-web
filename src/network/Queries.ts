@@ -62,7 +62,7 @@ export async function getMatchHistory(playerIds: string[]): Promise<MatchDetails
   console.log("getMatchHistory");
   let params = new URLSearchParams();
   playerIds.forEach((playerId) => params.append("player_id", playerId));
-  const response = await fetch(BASE_URL + "/history?" + params.toString());
+  const response = await fetch(BASE_URL + "/history/?" + params.toString());
   const results = response.json();
   return results;
 }
