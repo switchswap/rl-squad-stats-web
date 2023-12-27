@@ -1,15 +1,20 @@
 import { PLAYER_MAP } from "../Util";
+import { PlayerStats } from "./MatchDetails";
 
 export interface Player {
   id: string;
   name: string;
-  platform: string | undefined;
+  car_name: string | null;
+  platform: string;
+  stats: PlayerStats | null;
 }
 
 export function getPlayerFromId(id: string): Player {
   return {
     id: id,
     name: PLAYER_MAP[id],
-    platform: undefined,
+    car_name: "",
+    platform: "",
+    stats: null,
   };
 }

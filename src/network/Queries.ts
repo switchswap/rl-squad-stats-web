@@ -3,6 +3,7 @@ import { IPlayerWins, playerWinsToTeamWins } from "./types/IPlayerWins";
 import { TeamWins } from "../types/TeamWins";
 import { ITeamWins, toTeamWins } from "./types/ITeamWin";
 import { PlayerDetails } from "../types/PlayerDetails";
+import { MatchDetails } from "../types/MatchDetails";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -18,7 +19,7 @@ export async function getAllPlayerDetails(): Promise<PlayerDetails[]> {
         players: [],
         totalWins: 0,
         totalGames: 0,
-      },
+      }
     );
   });
 }
@@ -55,4 +56,13 @@ export async function getTotalGamesPlayed(): Promise<number> {
   const response = await fetch(BASE_URL + "/count");
   const results = await response.json();
   return results["count"];
+}
+
+export async function getMatchHistory(playerIds: string[]): Promise<MatchDetails[]> {
+  console.log("getMatchHistory");
+  let params = new URLSearchParams();
+  playerIds.forEach((playerId) => params.append("player_id", playerId));
+  const response = await fetch(BASE_URL + "/history?" + params.toString());
+  const results = response.json();
+  return results;
 }

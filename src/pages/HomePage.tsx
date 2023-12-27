@@ -17,7 +17,7 @@ export function HomePage(): JSXElement {
   const [threesWinsPerTeam] = createResource<TeamWins[], boolean>(true, getThreesWinsPerTeam);
 
   return (
-    <div class="flex flex-col flex-grow gap-6 p-4 overflow-y-hidden">
+    <div class="flex flex-col flex-grow gap-6 overflow-y-hidden">
       <div class="flex flex-row flex-nowrap gap-6">
         <LeaderBoard title="Overall" rankings={totalWinsPerPlayer() ?? []} isIndividual={true} />
         <LeaderBoard title="2v2" rankings={twosWinsPerTeam() ?? []} isIndividual={false} />

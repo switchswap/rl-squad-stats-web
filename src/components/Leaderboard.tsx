@@ -1,5 +1,6 @@
 import { For, JSXElement } from "solid-js";
 import { TeamWins } from "../types/TeamWins";
+import { A } from "@solidjs/router";
 
 export interface LeaderBoardProps {
   title: string;
@@ -56,19 +57,29 @@ interface TableRowProps {
   winDetails: TeamWins;
 }
 function TableRow(props: TableRowProps): JSXElement {
-  let teamName = "";
-  props.winDetails.players
-    .sort((p1, p2) => {
-      return p1.name > p2.name ? 1 : p1.name < p2.name ? -1 : 0;
-    })
-    .forEach((player) => {
-      teamName += player.name + " ";
-    });
+  function createMatchHistoryUrl(): string {
+    const idString = props.winDetails.players.map((player) => player.id).join(",");
+    return "/history?player_id=" + idString;
+  }
+
+  function getSortedTeamName(): string {
+    let teamName = "";
+    props.winDetails.players
+      .sort((p1, p2) => {
+        return p1.name > p2.name ? 1 : p1.name < p2.name ? -1 : 0;
+      })
+      .forEach((player) => {
+        teamName += player.name + " ";
+      });
+    return teamName;
+  }
 
   return (
     <tr class="hover">
       <th>{props.rank}</th>
-      <td>{teamName}</td>
+      <td>
+        <A href={createMatchHistoryUrl()}>{getSortedTeamName()}</A>
+      </td>
       <td>{props.winDetails.totalWins}</td>
       <td>{props.winDetails.totalGames}</td>
       <td>{((props.winDetails.totalWins / props.winDetails.totalGames) * 100).toFixed(2)}%</td>
