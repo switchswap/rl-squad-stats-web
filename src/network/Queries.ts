@@ -1,6 +1,6 @@
 import { IPlayerDetails, toPlayerDetails } from "./types/IPlayerDetails";
 import { IPlayerWins, playerWinsToTeamWins } from "./types/IPlayerWins";
-import { TeamWins } from "../types/TeamWins";
+import { TeamDetails } from "../types/TeamWins";
 import { ITeamWins, toTeamWins } from "./types/ITeamWin";
 import { PlayerDetails } from "../types/PlayerDetails";
 import { MatchDetails } from "../types/MatchDetails";
@@ -19,19 +19,20 @@ export async function getAllPlayerDetails(): Promise<PlayerDetails[]> {
         players: [],
         totalWins: 0,
         totalGames: 0,
+        winPercentage: 0,
       }
     );
   });
 }
 
-export async function getTotalWinsPerPlayer(): Promise<TeamWins[]> {
+export async function getTotalWinsPerPlayer(): Promise<TeamDetails[]> {
   console.log("getTotalWinsPerPlayer");
   const response = await fetch(BASE_URL + "/wins/individual");
   const results: IPlayerWins[] = await response.json();
   return results.map(playerWinsToTeamWins);
 }
 
-export async function getTwosWinsPerTeam(): Promise<TeamWins[]> {
+export async function getTwosWinsPerTeam(): Promise<TeamDetails[]> {
   console.log(BASE_URL);
   console.log("getTwosWinsPerTeam");
   const response = await fetch(BASE_URL + "/wins/2s", {
@@ -39,12 +40,11 @@ export async function getTwosWinsPerTeam(): Promise<TeamWins[]> {
       "Content-Type": "application/json",
     },
   });
-  console.log(response);
   const results: ITeamWins[] = await response.json();
   return results.map(toTeamWins);
 }
 
-export async function getThreesWinsPerTeam(): Promise<TeamWins[]> {
+export async function getThreesWinsPerTeam(): Promise<TeamDetails[]> {
   console.log("getThreesWinsPerTeam");
   const response = await fetch(BASE_URL + "/wins/3s");
   const results: ITeamWins[] = await response.json();

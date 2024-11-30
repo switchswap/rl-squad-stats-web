@@ -1,5 +1,5 @@
 import { getPlayerFromId } from "../../types/Player";
-import { TeamWins } from "../../types/TeamWins";
+import { TeamDetails } from "../../types/TeamWins";
 
 export interface IPlayerWins {
   id: string;
@@ -7,10 +7,11 @@ export interface IPlayerWins {
   totalGames: number;
 }
 
-export function playerWinsToTeamWins(iPlayerWins: IPlayerWins): TeamWins {
+export function playerWinsToTeamWins(iPlayerWins: IPlayerWins): TeamDetails {
   return {
     players: [getPlayerFromId(iPlayerWins.id)],
     totalGames: iPlayerWins.totalGames,
     totalWins: iPlayerWins.totalWins,
+    winPercentage: (iPlayerWins.totalWins / iPlayerWins.totalGames) * 100,
   };
 }

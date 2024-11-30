@@ -1,5 +1,5 @@
 import { PlayerDetails } from "../../types/PlayerDetails";
-import { TeamWins } from "../../types/TeamWins";
+import { TeamDetails } from "../../types/TeamWins";
 
 export interface IPlayerDetails {
   playerId: string;
@@ -15,7 +15,7 @@ export interface IPlayerDetails {
   totalDemosAgainst: number;
 }
 
-export function toPlayerDetails(iPlayerDetails: IPlayerDetails, playerWins: TeamWins): PlayerDetails {
+export function toPlayerDetails(iPlayerDetails: IPlayerDetails, playerWins: TeamDetails): PlayerDetails {
   return {
     name: iPlayerDetails.playerName + " (" + iPlayerDetails.platform + ")",
     pointsPerGame: iPlayerDetails.totalScore / iPlayerDetails.totalGames,

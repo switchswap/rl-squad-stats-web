@@ -1,3 +1,5 @@
+import { ColumnDetails } from "../components/sortable_table/ColumnDetails";
+
 export interface PlayerDetails {
   name: string;
   pointsPerGame: number;
@@ -11,15 +13,10 @@ export interface PlayerDetails {
   demosAgainst: number;
 }
 
-export interface StatDetails {
-  title: string;
-  summary: string;
-}
-
-export const STATS_MAP: Record<string, StatDetails> = {
+export const PLAYER_DETAILS_DATA_MAP: Record<keyof PlayerDetails, ColumnDetails> = {
   name: {
-    summary: "Name",
     title: "Name",
+    summary: "Name",
   },
   pointsPerGame: {
     title: "PPG",
@@ -58,11 +55,3 @@ export const STATS_MAP: Record<string, StatDetails> = {
     summary: "Demos against",
   },
 };
-
-export function getPlayerStatSummary(playerStatField: string): string {
-  return STATS_MAP[playerStatField].summary ?? "";
-}
-
-export function getPlayerStatTitle(playerStatField: string): string {
-  return STATS_MAP[playerStatField].title ?? "";
-}
