@@ -12,7 +12,7 @@ export interface Player {
 export function getPlayerFromId(id: string): Player {
   return {
     id: id,
-    name: PLAYER_MAP[id],
+    name: PLAYER_MAP[id] ?? "Rando",
     car_name: "",
     platform: "",
     stats: null,
