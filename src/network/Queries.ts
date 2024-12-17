@@ -4,6 +4,7 @@ import { TeamDetails } from "../types/TeamWins";
 import { ITeamWins, toTeamWins } from "./types/ITeamWin";
 import { PlayerDetails } from "../types/PlayerDetails";
 import { MatchDetails } from "../types/MatchDetails";
+import { DbInfo } from "../types/DbInfo";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -51,11 +52,11 @@ export async function getThreesWinsPerTeam(): Promise<TeamDetails[]> {
   return results.map(toTeamWins);
 }
 
-export async function getTotalGamesPlayed(): Promise<number> {
-  console.log("getTotalGamesPlayed");
-  const response = await fetch(BASE_URL + "/count");
+export async function getDbInfo(): Promise<DbInfo> {
+  console.log("getDbInfo");
+  const response = await fetch(BASE_URL + "/info");
   const results = await response.json();
-  return results["count"];
+  return results;
 }
 
 export async function getMatchHistory(playerIds: string[]): Promise<MatchDetails[]> {

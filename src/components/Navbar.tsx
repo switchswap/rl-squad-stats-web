@@ -1,8 +1,15 @@
 import { JSXElement, createResource } from "solid-js";
-import { getTotalGamesPlayed } from "../network/Queries";
+import { getDbInfo } from "../network/Queries";
+import { DbInfo } from "../types/DbInfo";
 
 export function NavBar(): JSXElement {
-  const [totalGamesPlayed] = createResource<number, boolean>(true, getTotalGamesPlayed);
+  const [dbInfo] = createResource<DbInfo, boolean>(true, getDbInfo);
+
+  function timestampToHumanReadable(timestampNs: number): string {
+    let timestampMs = Math.floor(timestampNs / 1_000_000);
+    let date = new Date(timestampMs);
+    return date.toLocaleDateString();
+  }
 
   return (
     <div class="navbar bg-primary rounded-xl mb-6">
@@ -11,8 +18,9 @@ export function NavBar(): JSXElement {
           Nap Gang RL Stats
         </a>
       </div>
-      <div class="flex-none mr-2">
-        <p>Games Played: {totalGamesPlayed()}</p>
+      <div class="flex-col mr-2">
+        <p class="text-lg">Games Played: {dbInfo()?.count}</p>
+        <p class="text-xs">Last updated: {timestampToHumanReadable(dbInfo()?.lastUpdatedTimestamp ?? 0)}</p>
       </div>
     </div>
   );
