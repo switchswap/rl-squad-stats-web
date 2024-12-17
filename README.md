@@ -1,21 +1,26 @@
-## Usage
+# rl-squad-stats-web
 
-```bash
-$ npm install # or pnpm install or yarn install
-```
+A website for tracking Rocket League player stats!
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
+## Development
 
-## Available Scripts
+> Note: Requires an instance of [rl-squad-stats-server](https://github.com/switchswap/rl-squad-stats-server) to work.
+
+### Setup
+
+1. `yarn install` to setup project.
+2. Create `.env` in the project root and add `VITE_API_BASE_URL=<your server url here>`.
+
+### Available Scripts
 
 In the project directory, you can run:
 
-### `npm run dev`
+#### `yarn run dev`
 
 Runs the app in the development mode.<br>
 Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
 
-### `npm run build`
+#### `yarn run build`
 
 Builds the app for production to the `dist` folder.<br>
 It correctly bundles Solid in production mode and optimizes the build for the best performance.
@@ -25,4 +30,4 @@ Your app is ready to be deployed!
 
 ## Deployment
 
-Learn more about deploying your application with the [documentations](https://vitejs.dev/guide/static-deploy.html)
+I deploy with [Netlify](https://www.netlify.com)!
